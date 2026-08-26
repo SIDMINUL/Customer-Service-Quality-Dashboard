@@ -14,7 +14,7 @@ complete data-analysis and reporting workflow.
 
 ## 📌 Dashboard Preview
 
-![Customer Service Quality Dashboard](Customer Service Quality Dashboard.png)
+![Customer Service Quality Dashboard](Customer_Service_Quality_Dashboard.png)
 
 ## 🎯 Project Objective
 
