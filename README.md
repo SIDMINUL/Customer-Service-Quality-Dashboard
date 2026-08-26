@@ -303,8 +303,8 @@ powerbi/Customer_Service_Quality_Dashboard.pbix
 B.Tech --- Electronics & Communication Engineering\
 Indian Institute of Information Technology, Ranchi
 
--   LinkedIn: `/in/abdul-momin-siddiqui`
--   GitHub: `<your-github-username>`
+-   LinkedIn: [`/in/abdul-momin-siddiqui](https://www.linkedin.com/in/abdul-momin-siddiqui-903147225/)`
+-   GitHub: `SIDMINUl`
 
 ## ⚠️ Disclaimer
 
