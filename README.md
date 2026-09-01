@@ -304,7 +304,7 @@ B.Tech --- Electronics & Communication Engineering\
 Indian Institute of Information Technology, Ranchi
 
 -   LinkedIn: [`/in/abdul-momin-siddiqui](https://www.linkedin.com/in/abdul-momin-siddiqui-903147225/)`
--   GitHub: `SIDMINUl`
+-   GitHub: `SIDMINUL`
 
 ## ⚠️ Disclaimer
 
