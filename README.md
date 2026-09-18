@@ -1,268 +1,182 @@
-# 📊 Customer Service Quality Analysis Dashboard
+# Customer Service Quality Analysis Dashboard
 
-An end-to-end **Customer Service Quality Analysis** project built to analyze customer-service interactions, monitor quality KPIs, evaluate agent performance, identify low-quality interaction patterns, and support root-cause analysis.
+An end-to-end **Customer Service & Operations Analytics** project built to analyze customer-service interactions, monitor service-quality KPIs, evaluate channel and team performance, identify operational bottlenecks, and support root-cause analysis.
 
-The project combines **Python, SQL, Excel, and Power BI** to demonstrate a practical data-analysis and business-reporting workflow.
+The project combines **Python, PostgreSQL/SQL, and Power BI** to demonstrate a practical data-analysis and business-reporting workflow.
 
-> **Dataset:** 5,000 synthetic customer-service interactions covering January–June 2025. The dataset is for portfolio/educational use and contains no real customer or company data.
+> **Current analysis:** 30,000 synthetic customer-service interactions covering January 2025–August 2026. The dataset is for portfolio/educational use and contains no real customer or company data.
 
-## 📌 Dashboard Preview
+## Dashboard
 
-![Customer Service Quality Dashboard](Customer_Service_Quality_Dashboard.png)
+The Power BI report includes:
 
-## 🎯 Project Objectives
+- Executive Overview
+- KPI cards for interactions, CSAT, FCR, escalation, and SLA breach
+- Monthly interaction trends
+- Channel performance
+- Issue-category analysis
+- Channel quality analysis
+- Team workload and CSAT
+- Priority analysis
+- Interactive slicers
+- Drill-through Interaction Details page
+- Dynamic drill-through title
+- Interaction-level records
 
-This project answers key operational questions:
-
-- What is the overall customer-service quality?
-- How satisfied are customers?
-- What is the First Contact Resolution (FCR) rate?
-- How frequently are cases escalated?
-- Which agents perform above or below the overall quality level?
-- Which issue types are associated with lower quality?
-- Where are low-quality interactions concentrated?
-- How does service quality change over time?
-
-## 🛠️ Tech Stack
-
-| Technology | Purpose |
-|---|---|
-| **Python** | Data validation, KPI analysis, EDA and visualization |
-| **Pandas / NumPy** | Data manipulation and analysis |
-| **SQL / MySQL** | KPI queries, aggregation and performance analysis |
-| **Excel** | Data analysis and reporting |
-| **Power BI** | Interactive dashboard and business reporting |
-| **Git / GitHub** | Version control and project documentation |
-
-## 📂 Repository Structure
-
-```text
-Customer-Service-Quality-Dashboard/
-├── customer_service_interactions.csv          # Synthetic source dataset
-├── analysis.py                                 # Python analysis workflow
-├── analysis_queries.sql                         # SQL analysis queries
-├── customer_service_quality_analysis.xlsx     # Excel analysis workbook
-├── Customer_Service_Quality_Dashboard.xlsx    # Excel dashboard workbook
-├── Customer_Service_Quality_Dashboard.pbix    # Power BI report
-├── Customer_Service_Quality_Dashboard.png     # Dashboard preview
-├── DEPLOYMENT.md                               # Power BI publishing guide
-└── README.md
-```
-
-## 📊 Dataset
-
-The dataset contains customer-service interaction records with fields including:
-
-- `Interaction_ID`
-- `Date`
-- `Agent`
-- `Issue_Type`
-- `Priority`
-- `Channel`
-- `Response_Time_Minutes`
-- `Resolution_Time_Hours`
-- `Resolution_Status`
-- `FCR`
-- `Escalated`
-- `Quality_Score`
-- `CSAT`
-- `Compliance_Score`
-
-## 📈 Key KPIs
+## Key KPIs
 
 | KPI | Value |
 |---|---:|
-| Total Interactions | **5,000** |
-| Average Quality Score | **81.5** |
-| Average CSAT | **4.38 / 5** |
-| FCR Rate | **77.96%** |
-| Escalation Rate | **7.26%** |
-| Average Response Time | **91.93 min** |
-| Average Resolution Time | **40.99 hrs** |
-| Average Compliance | **91.43%** |
+| Total Interactions | **30,000** |
+| Average CSAT | **4.23 / 5** |
+| FCR | **78.8%** |
+| Escalation Rate | **17.9%** |
+| SLA Breach Rate | **25.5%** |
+| Average Response Time | **88.2 min** |
+| Average Resolution Time | **107.0 min** |
 
-These figures are calculated from the synthetic dataset included in the repository.
+## Business Insights
 
-## 📊 Dashboard Analysis
+The analysis identified several operational patterns:
 
-The Power BI dashboard provides:
+- **Email** represented 23.9% of interactions but approximately **67.1% of all SLA breaches**, with a 71.6% SLA-breach rate and 212.3-minute average response time.
+- **Critical and High-priority cases** showed lower FCR and higher escalation/SLA-breach rates than Low-priority cases.
+- **Technical Issues** were the largest issue category at 17.6% of interactions and had a 72.4% FCR, approximately 6.4 percentage points below the overall FCR.
+- **Technical Support** had the longest average resolution time at approximately 159 minutes and the lowest team-level CSAT at 4.15.
+- Response time showed a **-0.487 correlation with CSAT** and a **+0.647 correlation with SLA breaches**.
 
-- **KPI monitoring** — interactions, quality, CSAT, FCR, escalation, response time, resolution time and compliance.
-- **Monthly quality trends** — tracks changes in average quality over time.
-- **Agent performance** — compares quality and service metrics across agents.
-- **Issue-type analysis** — identifies issue categories with weaker quality performance.
-- **Low-quality analysis** — examines interactions with `Quality_Score < 70` for root-cause analysis.
-- **Interactive filters** — Date, Agent, Issue Type, Priority and Channel.
+See the complete analysis in **[BUSINESS_INSIGHTS.md](BUSINESS_INSIGHTS.md)**.
 
-## 🧮 Key DAX Measures
+> Correlation findings describe association, not causation. The dataset is synthetic and the observations should be validated with real operational data.
 
-### Total Interactions
+## Technology Stack
 
-```dax
-Total Interactions =
-COUNTROWS(Raw_Data)
-```
+| Technology | Purpose |
+|---|---|
+| **Python** | Data cleaning, validation, EDA and KPI analysis |
+| **Pandas / NumPy** | Data manipulation and analysis |
+| **PostgreSQL** | Data storage and analytical querying |
+| **SQL** | KPI calculations, aggregation, CTEs and window functions |
+| **Power BI** | Interactive dashboard and reporting |
+| **DAX** | KPI measures, date table and drill-through logic |
+| **Git / GitHub** | Version control and project documentation |
 
-### Average Quality
-
-```dax
-Avg Quality =
-AVERAGE(Raw_Data[Quality_Score])
-```
-
-### Average CSAT
-
-```dax
-Avg CSAT =
-AVERAGE(Raw_Data[CSAT])
-```
-
-### FCR Rate
-
-```dax
-FCR Rate =
-DIVIDE(
-    CALCULATE(
-        COUNTROWS(Raw_Data),
-        Raw_Data[FCR] = "Yes"
-    ),
-    [Total Interactions]
-)
-```
-
-### Escalation Rate
-
-```dax
-Escalation Rate =
-DIVIDE(
-    CALCULATE(
-        COUNTROWS(Raw_Data),
-        Raw_Data[Escalated] = "Yes"
-    ),
-    [Total Interactions]
-)
-```
-
-### Low Quality Cases
-
-```dax
-Low Quality Cases =
-CALCULATE(
-    COUNTROWS(Raw_Data),
-    Raw_Data[Quality_Score] < 70
-)
-```
-
-## 🔍 Analysis Workflow
+## Analysis Workflow
 
 ```text
-Synthetic Customer-Service Data
-            ↓
-Data Validation & Cleaning
-            ↓
-Python Exploratory Analysis
-            ↓
+Customer-Service Data
+        ↓
+Python Data Validation & Cleaning
+        ↓
+PostgreSQL
+        ↓
 SQL KPI & Performance Analysis
-            ↓
-Quality / Issue Analysis
-            ↓
-Low-Quality & Root-Cause Analysis
-            ↓
-Power BI Dashboard
-            ↓
-Business Insights & Reporting
+        ↓
+Power BI Data Model & DAX
+        ↓
+Interactive Executive Dashboard
+        ↓
+Drill-through Interaction Details
+        ↓
+Business Insights
 ```
 
-## 🗄️ SQL Analysis
+## SQL Analysis
 
-`analysis_queries.sql` contains queries for:
+The SQL layer covers:
 
 1. Overall KPI calculation
-2. Agent-level performance
-3. Issue-level quality analysis
-4. Low-quality interactions for root-cause analysis
-5. Monthly quality, CSAT and FCR trends
-6. Pareto source analysis for low-quality cases
+2. Channel performance
+3. Issue-category analysis
+4. Team performance
+5. Monthly trends
+6. Priority analysis
+7. Customer-segment analysis
+8. Agent performance
+9. High-risk interactions
+10. Team-vs-overall comparisons using CTEs
+11. Rolling 3-month CSAT using window functions
 
-## 🐍 Python Analysis
+## Power BI Model
 
-`analysis.py` performs:
+The report uses a dedicated `DateTable` related to `customer_interactions[Interaction_date]`.
 
-- Dataset shape and missing-value checks
-- Duplicate interaction-ID checks
-- KPI calculation
-- Agent performance analysis
-- Issue-level analysis
-- Low-quality Pareto analysis
-- Monthly quality/CSAT trends
-- Portfolio-ready trend charts
+### Core DAX Measures
 
-## 🚀 How to Use
+```DAX
+Total Interactions =
+COUNTROWS(customer_interactions)
 
-### Python
+Average CSAT =
+AVERAGE(customer_interactions[csat])
 
-```bash
-pip install pandas numpy matplotlib
-python analysis.py
+FCR % =
+AVERAGE(customer_interactions[fcr])
+
+Escalation % =
+AVERAGE(customer_interactions[escalated])
+
+SLA Breach % =
+AVERAGE(customer_interactions[sla_breached])
+
+Avg Response Time =
+AVERAGE(customer_interactions[response_time_min])
+
+Avg Resolution Time =
+AVERAGE(customer_interactions[resolution_time_min])
 ```
 
-### SQL
-
-Load `customer_service_interactions.csv` into a table named `customer_interactions`, then run:
+## Project Structure
 
 ```text
-analysis_queries.sql
+Customer-Service-Quality-Dashboard/
+├── customer_service_interactions.csv
+├── analysis.py
+├── analysis_queries.sql
+├── Customer_Service_Quality_Dashboard.pbix
+├── Customer_Service_Quality_Dashboard.png
+├── BUSINESS_INSIGHTS.md
+├── DEPLOYMENT.md
+└── README.md
 ```
 
-### Excel
-
-Open either Excel workbook in Microsoft Excel for spreadsheet-based analysis and reporting.
-
-### Power BI
-
-Open `Customer_Service_Quality_Dashboard.pbix` in **Power BI Desktop** to explore the interactive report.
-
-For publishing instructions, see [`DEPLOYMENT.md`](DEPLOYMENT.md).
-
-## 💡 Business Insights This Project Supports
-
-The analysis can help identify:
-
-- Quality gaps across agents or issue categories
-- Relationships between CSAT, FCR and quality
-- High concentrations of low-quality cases
-- Escalation-heavy service areas
-- Trends that may require process improvement
-- Operational areas where coaching or workflow changes could improve service quality
-
-## 📌 Skills Demonstrated
+## Skills Demonstrated
 
 - Data Cleaning & Validation
-- SQL / MySQL
-- Python
-- Pandas / NumPy
 - Exploratory Data Analysis
+- Python / Pandas / NumPy
+- PostgreSQL
+- Analytical SQL
+- CTEs
+- Window Functions
 - KPI Development
-- Customer Service Quality Analysis
-- Customer Satisfaction Analysis
-- Agent Performance Analysis
-- Root-Cause Analysis
-- Pareto Analysis
-- Trend Analysis
+- Customer Service Analytics
 - Power BI
-- Dashboard Development
-- Business Reporting
+- DAX
+- Data Modeling
+- Interactive Dashboard Development
+- Drill-through Analysis
+- Business Insight Generation
 
-## 👨‍💻 Author
+## Resume Version
+
+**Customer Service & Operations Analytics Dashboard | Python, SQL, PostgreSQL, Power BI, DAX**
+
+- Analyzed **30,000 customer-service interactions** across channels, teams, issue categories, priorities, and customer segments to evaluate CSAT, FCR, escalation, SLA, response time, and resolution performance.
+- Used **Python and PostgreSQL/SQL** for data cleaning, validation, KPI computation, segmentation, trend analysis, CTEs, and window-function analysis.
+- Built an interactive **Power BI dashboard** with KPI cards, time trends, channel and issue analysis, team workload, priority analysis, slicers, and drill-through interaction details.
+- Identified **Email as a major SLA bottleneck**, accounting for approximately **67% of all SLA breaches** while representing 23.9% of interactions.
+- Found a **-0.49 correlation between response time and CSAT** and a **+0.65 correlation between response time and SLA breaches**, supporting further investigation of response-time management.
+
+## Author
 
 **Abdul Momin Siddiqui**
 
 B.Tech — Electronics & Communication Engineering  
 Indian Institute of Information Technology, Ranchi
 
-- LinkedIn: `/in/abdul-momin-siddiqui-903147225/`
-- GitHub: `SIDMINUL`
+- GitHub: **SIDMINUL**
 
-## ⚠️ Disclaimer
+## Disclaimer
 
-This project is intended for educational and portfolio purposes. The customer-service dataset is **synthetic** and should not be interpreted as real customer, employee, or company data.
+This project uses a **synthetic dataset** for educational and portfolio purposes. The findings should not be interpreted as real customer, employee, or company performance data.
