@@ -6,6 +6,16 @@ The project combines **Python, PostgreSQL/SQL, and Power BI** to demonstrate a p
 
 > **Current analysis:** 30,000 synthetic customer-service interactions covering January 2025–August 2026. The dataset is for portfolio/educational use and contains no real customer or company data.
 
+## Dashboard Screenshots
+
+### Executive Overview
+
+![Executive Overview](screenshots/executive_overview.png)
+
+### Interaction Details
+
+![Interaction Details](screenshots/interaction_details.png)
+
 ## Dashboard
 
 The Power BI report includes:
@@ -130,13 +140,25 @@ AVERAGE(customer_interactions[resolution_time_min])
 
 ```text
 Customer-Service-Quality-Dashboard/
-├── customer_service_interactions.csv
-├── analysis.py
-├── analysis_queries.sql
-├── Customer_Service_Quality_Dashboard.pbix
-├── Customer_Service_Quality_Dashboard.png
+├── data/
+│   ├── customer_service_interactions.csv
+│   ├── customer_service_data_dictionary.csv
+│   └── processed/
+│       └── customer_service_cleaned.csv
+├── notebooks/
+│   └── 01_eda_cleaning.ipynb
+├── sql/
+│   └── analysis_queries.sql
+├── src/
+│   └── data_cleaning.py
+├── powerbi/
+│   └── Customer_Service_Quality_Dashboard.pbix
+├── screenshots/
+│   ├── executive_overview.png
+│   └── interaction_details.png
 ├── BUSINESS_INSIGHTS.md
-├── DEPLOYMENT.md
+├── requirements.txt
+├── .gitignore
 └── README.md
 ```
 
