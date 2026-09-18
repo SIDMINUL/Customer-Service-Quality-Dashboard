@@ -149,8 +149,6 @@ Customer-Service-Quality-Dashboard/
 │   └── 01_eda_cleaning.ipynb
 ├── sql/
 │   └── analysis_queries.sql
-├── src/
-│   └── data_cleaning.py
 ├── powerbi/
 │   └── Customer_Service_Quality_Dashboard.pbix
 ├── screenshots/
@@ -180,15 +178,6 @@ Customer-Service-Quality-Dashboard/
 - Drill-through Analysis
 - Business Insight Generation
 
-## Resume Version
-
-**Customer Service & Operations Analytics Dashboard | Python, SQL, PostgreSQL, Power BI, DAX**
-
-- Analyzed **30,000 customer-service interactions** across channels, teams, issue categories, priorities, and customer segments to evaluate CSAT, FCR, escalation, SLA, response time, and resolution performance.
-- Used **Python and PostgreSQL/SQL** for data cleaning, validation, KPI computation, segmentation, trend analysis, CTEs, and window-function analysis.
-- Built an interactive **Power BI dashboard** with KPI cards, time trends, channel and issue analysis, team workload, priority analysis, slicers, and drill-through interaction details.
-- Identified **Email as a major SLA bottleneck**, accounting for approximately **67% of all SLA breaches** while representing 23.9% of interactions.
-- Found a **-0.49 correlation between response time and CSAT** and a **+0.65 correlation between response time and SLA breaches**, supporting further investigation of response-time management.
 
 ## Author
 
