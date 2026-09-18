@@ -1,0 +1,18 @@
+Column,Description
+Interaction_ID,Unique interaction identifier
+Customer_ID,Unique customer identifier
+Interaction_Date,Date and time of interaction
+Channel,Customer contact channel
+Team,Support team handling interaction
+Customer_Segment,Customer segment
+Issue_Category,Primary issue category
+Priority,Interaction priority
+Agent_ID,Assigned support agent
+Previous_Interactions,Number of previous interactions
+Response_Time_Min,Minutes until initial response
+Resolution_Time_Min,Minutes until resolution/closure
+Escalated,Customer satisfaction score from 1 to 5
+FCR,"First-contact resolution flag: 1=Yes, 0=No"
+CSAT,"Escalation flag: 1=Yes, 0=No"
+Resolution_Status,Final resolution status
+SLA_Breached,"SLA breach flag: 1=Yes, 0=No"
